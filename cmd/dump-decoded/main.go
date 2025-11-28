@@ -7,7 +7,7 @@ import (
 	"os"
 
 	"github.com/davecgh/go-spew/spew"
-	. "github.com/dozen/ruby-marshal"
+	. "github.com/gebi/ruby-marshal"
 )
 
 func main() {

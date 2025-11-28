@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	. "github.com/dozen/ruby-marshal"
+	. "github.com/gebi/ruby-marshal"
 )
 
 func main() {
