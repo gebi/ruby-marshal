@@ -21,7 +21,7 @@ func main() {
 		input = os.Stdin
 	}
 
-	err = DumpSchema(input, os.Stdout)
+	err = DebugDumpSchema(input, os.Stdout)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -5,13 +5,13 @@ import (
 	"io"
 )
 
-type SchemaDumper struct {
+type schemaDumper struct {
 	d      *Decoder
 	w      io.Writer
 	indent int
 }
 
-func DumpSchema(r io.Reader, w io.Writer) error {
+func DebugDumpSchema(r io.Reader, w io.Writer) error {
 	d := NewDecoder(r)
 	// read and validate header
 	major, err := d.r.ReadByte()
@@ -26,11 +26,11 @@ func DumpSchema(r io.Reader, w io.Writer) error {
 		return fmt.Errorf("unsupported marshal version %d.%d", major, minor)
 	}
 
-	sd := &SchemaDumper{d: d, w: w}
+	sd := &schemaDumper{d: d, w: w}
 	return sd.dumpNext()
 }
 
-func (sd *SchemaDumper) writeLine(format string, a ...interface{}) {
+func (sd *schemaDumper) writeLine(format string, a ...interface{}) {
 	indent := ""
 	for i := 0; i < sd.indent; i++ {
 		indent += "    "
@@ -38,7 +38,7 @@ func (sd *SchemaDumper) writeLine(format string, a ...interface{}) {
 	fmt.Fprintf(sd.w, "%s%s\n", indent, fmt.Sprintf(format, a...))
 }
 
-func (sd *SchemaDumper) dumpNext() error {
+func (sd *schemaDumper) dumpNext() error {
 	typ, err := sd.d.r.ReadByte()
 	if err != nil {
 		return err
